@@ -1,6 +1,6 @@
 # Bonfire.Invite.Links
 
-A template for creating custom extensions for [Bonfire](https://bonfire.cafe/)
+An extension for [Bonfire](https://bonfire.cafe/) to generate invite links
 
 ## Handy commands
 
