@@ -8,7 +8,7 @@ import Config
 # import_config "bonfire_web_phoenix.exs"
 
 # include all used Bonfire extensions
-import_config "bonfire_extension_template.exs"
+import_config "bonfire_invite_links.exs"
 
 
 #### Basic configuration

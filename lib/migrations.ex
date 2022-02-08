@@ -1,4 +1,4 @@
-defmodule Bonfire.ExtensionTemplate.Migrations do
+defmodule Bonfire.Invite.Links.Migrations do
   use Ecto.Migration
 
 end

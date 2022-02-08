@@ -1,4 +1,4 @@
-defmodule Bonfire.ExtensionTemplate.Integration do
+defmodule Bonfire.Invite.Links.Integration do
   alias Bonfire.Common.Config
   alias Bonfire.Common.Utils
   require Logger

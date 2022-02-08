@@ -1,4 +1,4 @@
-defmodule Bonfire.ExtensionTemplate.ChannelCase do
+defmodule Bonfire.Invite.Links.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -17,13 +17,13 @@ defmodule Bonfire.ExtensionTemplate.ChannelCase do
 
   use ExUnit.CaseTemplate
 
-  import Bonfire.ExtensionTemplate.Integration
+  import Bonfire.Invite.Links.Integration
 
   using do
     quote do
       # Import conveniences for testing with channels
       import Phoenix.ChannelTest
-      import Bonfire.ExtensionTemplate.ChannelCase
+      import Bonfire.Invite.Links.ChannelCase
 
       # The default endpoint for testing
       @endpoint Bonfire.Common.Config.get!(:endpoint_module)

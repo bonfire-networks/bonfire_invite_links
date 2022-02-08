@@ -1,6 +1,6 @@
-defmodule Bonfire.ExtensionTemplate.DataHelpers do
+defmodule Bonfire.Invite.Links.DataHelpers do
 
   # import ExUnit.Assertions
-  # alias Bonfire.ExtensionTemplate.Fake
+  # alias Bonfire.Invite.Links.Fake
 
 end

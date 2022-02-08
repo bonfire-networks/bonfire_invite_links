@@ -1,4 +1,4 @@
-defmodule Bonfire.ExtensionTemplate.Test.ConnHelpers do
+defmodule Bonfire.Invite.Links.Test.ConnHelpers do
 
   import ExUnit.Assertions
   import Plug.Conn

@@ -1,11 +1,11 @@
 Code.eval_file("mess.exs")
-defmodule Bonfire.ExtensionTemplate.MixProject do
+defmodule Bonfire.Invite.Links.MixProject do
 
   use Mix.Project
 
   def project do
     [
-      app: :bonfire_extension_template,
+      app: :bonfire_invite_links,
       version: "0.0.1",
       elixir: "~> 1.10",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -22,7 +22,7 @@ defmodule Bonfire.ExtensionTemplate.MixProject do
 
   def application do
     [
-      # mod: {Bonfire.ExtensionTemplate.FallbackApplication, []},
+      # mod: {Bonfire.Invite.Links.FallbackApplication, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

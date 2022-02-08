@@ -1,8 +1,8 @@
-defmodule Bonfire.ExtensionTemplate.Fake do
+defmodule Bonfire.Invite.Links.Fake do
 
   alias Bonfire.Me.Fake, as: MeFake
 
-  # import Bonfire.ExtensionTemplate.Integration
+  # import Bonfire.Invite.Links.Integration
 
   defdelegate fake_account!(attrs \\ %{}, opts \\ []), to: MeFake
 

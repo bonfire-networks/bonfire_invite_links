@@ -1,4 +1,4 @@
-# Bonfire.ExtensionTemplate
+# Bonfire.Invite.Links
 
 A template for creating custom extensions for [Bonfire](https://bonfire.cafe/)
 

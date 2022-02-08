@@ -25,7 +25,7 @@ erl_crash.dump
 *.ez
 
 # Ignore package tarball (built via "mix hex.build").
-bonfire_extension_template-*.tar
+bonfire_invite_links-*.tar
 
 # If NPM crashes, it generates a log, let's ignore it too.
 npm-debug.log

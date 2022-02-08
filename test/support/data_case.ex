@@ -1,4 +1,4 @@
-defmodule Bonfire.ExtensionTemplate.DataCase do
+defmodule Bonfire.Invite.Links.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -10,12 +10,12 @@ defmodule Bonfire.ExtensionTemplate.DataCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use Bonfire.ExtensionTemplate.DataCase, async: true`, although
+  by setting `use Bonfire.Invite.Links.DataCase, async: true`, although
   this option is not recommended for other databases.
   """
 
   use ExUnit.CaseTemplate
-  import Bonfire.ExtensionTemplate.Integration
+  import Bonfire.Invite.Links.Integration
 
   using do
     quote do
@@ -23,7 +23,7 @@ defmodule Bonfire.ExtensionTemplate.DataCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Bonfire.ExtensionTemplate.DataCase
+      import Bonfire.Invite.Links.DataCase
     end
   end
 
