@@ -9,7 +9,7 @@ defmodule Bonfire.Invite.Links.Web.AdminInvitesLive do
     |> assign(
       invites: invites,
       page_info: page_info,
-      feed_update_mode: "prepend"
+      feed_update_mode: "append"
     )
     }
   end
