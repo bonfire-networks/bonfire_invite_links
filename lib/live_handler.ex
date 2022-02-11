@@ -6,7 +6,7 @@ defmodule Bonfire.Invite.Links.LiveHandler do
     with {:ok, invite} <-  Bonfire.Invite.Links.create(current_user(socket), attrs) do
       debug(invite)
       {:noreply, socket
-        |> assign(invites: [invite] ++ e(socket, :assigns, :invites, []) )
+        |> assign(invites: [invite] ++ e(socket, :assigns, :invites, []))
         |> put_flash(:info, l "New invite generated!")
         }
     end

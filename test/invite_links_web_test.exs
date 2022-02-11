@@ -38,6 +38,29 @@ defmodule Bonfire.Invite.Links.Web.Test do
       |> Floki.text() =~ "11d"
 
     end
+
+    test "shows a list of invites" do
+
+      some_account = fake_account!()
+      {:ok, someone} = fake_user!(some_account)
+                |> Bonfire.Me.Users.make_admin()
+
+      conn = conn(user: someone, account: some_account)
+
+      Bonfire.Invite.Links.create(someone, %{"max_uses" => 1, "max_days_valid" => 1})
+      Bonfire.Invite.Links.create(someone, %{"max_uses" => 1, "max_days_valid" => 1})
+      Bonfire.Invite.Links.create(someone, %{"max_uses" => 1, "max_days_valid" => 1})
+      Bonfire.Invite.Links.create(someone, %{"max_uses" => 1, "max_days_valid" => 1})
+
+      next = "/settings/admin/invites"
+      {view, doc} = floki_live(conn, next)
+
+      assert view
+      |> Floki.find("table tr")
+      |> debug
+      |> Enum.count == 4
+
+    end
   end
 
 end
