@@ -17,7 +17,7 @@ defmodule Bonfire.Invite.Links.Web.Test do
       {view, doc} = floki_live(conn, next) #|> debug
       assert view
       |> form("[data-id='generate_invite_link']")
-      |> render_submit(%{"invite_link" => %{"max_uses" => 0, "max_days_valid" =>0}})
+      |> render_submit(%{"invite_link" => %{"max_uses" => "", "max_days_valid" =>""}})
       |> Floki.text() =~ "New invite generated"
 
     end
@@ -34,9 +34,8 @@ defmodule Bonfire.Invite.Links.Web.Test do
       {view, doc} = floki_live(conn, next) #|> debug
       assert view
       |> form("[data-id='generate_invite_link']")
-      |> render_submit(%{"invite_link" => %{"max_uses" => 1, "max_days_valid" => 1}})
-      |> Floki.text() =~ "11d"
-
+      |> render_submit(%{"invite_link" => %{"max_uses" => 7, "max_days_valid" => 1}})
+      |> Floki.text() =~ "7in 23 hours"
     end
 
     test "shows a list of invites" do
@@ -55,11 +54,10 @@ defmodule Bonfire.Invite.Links.Web.Test do
       next = "/settings/admin/invites"
       {view, doc} = floki_live(conn, next)
 
-      assert view
-      |> Floki.find("table tr")
-      |> debug
+      assert doc
+      |> Floki.find("#invites_list tr")
+      # |> debug
       |> Enum.count == 4
-
     end
   end
 

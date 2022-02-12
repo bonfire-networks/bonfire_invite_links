@@ -17,7 +17,7 @@
             </Label>
             <div class="">
               <Select 
-              options={"No limits": 0, "1": "1", "2": "2", "3": "3", "4": "4", "5": "5", "6": "6", "7": "7", "8": "8", "9": "9", "10": "10"}
+              options={"No limits": "", "1": "1", "2": "2", "5": "5", "10": "10", "20": "20", "50": "50", "100": "100", "500": "500", "1000": "1000"}
               class="w-full select select-bordered"
               />
             </div>
@@ -29,7 +29,7 @@
             </Label>
             <div class="">
               <Select 
-              options={"Never": 0, "1 day": "1", "2 day": "2", "3 day": "3", "4 day": "4", "5 day": "5", "6 day": "6", "In a week": "7"}
+              options={"Never": "", "1 day": "1", "2 days": "2", "1 week": "7", "2 weeks": "4", "1 month": "28", "6 months": "182", "1 year": "365"} 
               class="w-full select select-bordered"/>
             </div>
           </Field> 
@@ -76,7 +76,12 @@
                 <td>
                   <span class="text-sm text-base-content">{e(invite, :max_uses, "Unlimited")}</span>
                 </td> 
-                <td><span class="text-sm text-base-content">{e(invite, :max_days_valid, "")}d</span></td>
+                <td>
+                
+                  <span :if={e(invite, :max_days_valid, 0)>0} class="text-sm text-base-content">{if expired?(invite), do: l("expired"), else: date_relative(date_expires(invite))}</span>
+                  <span :if={e(invite, :max_days_valid, 0)==0} class="text-sm text-base-content">{l "does not expire"}</span>
+                
+                </td>
                 <th>
                   <button class="flex items-center btn btn-ghost btn-sm">
                   <Outline.TrashIcon />
@@ -89,7 +94,7 @@
           </table>
         </div>
 
-        <Bonfire.UI.Social.LoadMoreLive live_handler={Bonfire.Invite.Links} page_info={@page_info} target={@myself} />
+        <Bonfire.UI.Social.LoadMoreLive :if={e(assigns, :page_info, nil)} live_handler={Bonfire.Invite.Links} page_info={@page_info} target={@myself} />
 
     </div>
   </div>

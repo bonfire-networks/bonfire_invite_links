@@ -1,21 +1,77 @@
 defmodule Bonfire.Invite.Links do
   use Bonfire.Repo
+  alias Bonfire.InviteLink
+  use Bonfire.Common.Utils
+  use Arrows
 
   def create(user, attrs) do
 
     repo().transact_with(fn ->
-      with {:ok, invite} <- repo().insert(Bonfire.InviteLink.changeset(attrs)) do
+      with {:ok, invite} <- repo().insert(InviteLink.changeset(attrs)) do
 
         {:ok, invite}
       end
     end)
   end
 
+  def redeem(%InviteLink{} = invite) do
+    if !redeemable?(invite), do: raise l "Sorry, this invite is no longer valid."
 
-  def list_paginated(filters, opts \\ [], query \\ Bonfire.InviteLink) do
+    from(r in InviteLink,
+      update: [inc: [max_uses: -1]],
+      where: r.id == ^invite.id
+    )
+    |> repo().update_all([])
+  end
+  def redeem(invite_id) when is_binary(invite_id) do
+    one(id: invite_id) ~> redeem()
+  end
 
-    query
-      |> query_filter(filters)
+
+  def query(filters, _opts \\ []) do
+    InviteLink
+    |> query_filter(filters)
+  end
+
+  def one(filters, opts \\ []) do
+    query(filters, opts)
+    |> repo().single()
+  end
+
+  def list_paginated(filters, opts \\ []) do
+
+    query(filters, opts)
       |> Bonfire.Repo.many_paginated(opts[:paginate]) # return a page of items (reverse chronological) + pagination metadata
+  end
+
+  def redeemable?(%InviteLink{} = invite) do
+    (is_nil(invite.max_uses) or invite.max_uses > 0)
+      and !expired?(invite)
+  end
+
+  def redeemable?(invite_id) when is_binary(invite_id) do
+    one(id: invite_id) ~> redeemable?()
+  end
+
+  def date_expires(%InviteLink{} = invite) do
+    created = Utils.date_from_pointer(invite)
+
+    if invite.max_days_valid && invite.max_days_valid > 0 do
+      expiry_date = DateTime.add(created, invite.max_days_valid*24*60*60, :second)
+    end
+  end
+
+  def expired?(%InviteLink{} = invite) do
+    created = Utils.date_from_pointer(invite)
+    date_expires = date_expires(invite)
+
+    if date_expires do
+      case DateTime.compare(date_expires, created) do
+        :gt -> false # expiry_date > created == not expired
+        _other -> true
+      end
+    else # no limit
+      false
+    end
   end
 end

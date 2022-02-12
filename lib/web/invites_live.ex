@@ -1,10 +1,11 @@
-defmodule Bonfire.Invite.Links.Web.AdminInvitesLive do
+defmodule Bonfire.Invite.Links.Web.InvitesLive do
   use Bonfire.Web, :stateful_component
+  import Bonfire.Invite.Links
 
   prop invites, :list, default: []
 
   def update(assigns, socket) do
-    %{edges: invites, page_info: page_info} = Bonfire.Invite.Links.list_paginated([], socket: socket)
+    %{edges: invites, page_info: page_info} = list_paginated([], socket: socket)
     {:ok, socket
     |> assign(
       invites: invites,
