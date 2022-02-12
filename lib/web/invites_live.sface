@@ -49,7 +49,7 @@
             <thead>
               <tr>
                 <th>Link</th>
-                <th>Uses</th>
+                <th>Uses left</th>
                 <th>Expires</th>
                 <th></th>
               </tr>
@@ -79,7 +79,7 @@
                 <td>
                 
                   <span :if={e(invite, :max_days_valid, 0)>0} class="text-sm text-base-content">{if expired?(invite), do: l("expired"), else: date_relative(date_expires(invite))}</span>
-                  <span :if={e(invite, :max_days_valid, 0)==0} class="text-sm text-base-content">{l "does not expire"}</span>
+                  <span :if={e(invite, :max_days_valid, 0)==0} class="text-sm text-base-content">{l "never"}</span>
                 
                 </td>
                 <th>
