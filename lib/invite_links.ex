@@ -24,7 +24,7 @@ defmodule Bonfire.Invite.Links do
     |> repo().update_all([])
   end
   def redeem(invite_id) when is_binary(invite_id) do
-    one(id: invite_id) ~> redeem()
+    get(invite_id) ~> redeem()
   end
   def redeem(_) do
     nil
@@ -38,6 +38,10 @@ defmodule Bonfire.Invite.Links do
   def one(filters, opts \\ []) do
     query(filters, opts)
     |> repo().single()
+  end
+
+  def get(id, opts \\ []) do
+    if is_ulid?(id), do: one([id: id], opts)
   end
 
   def list_paginated(filters, opts \\ []) do
