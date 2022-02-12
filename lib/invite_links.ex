@@ -26,7 +26,9 @@ defmodule Bonfire.Invite.Links do
   def redeem(invite_id) when is_binary(invite_id) do
     one(id: invite_id) ~> redeem()
   end
-
+  def redeem(_) do
+    nil
+  end
 
   def query(filters, _opts \\ []) do
     InviteLink
