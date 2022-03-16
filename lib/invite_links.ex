@@ -60,7 +60,7 @@ defmodule Bonfire.Invite.Links do
   end
 
   def date_expires(%InviteLink{} = invite) do
-    created = Utils.date_from_pointer(invite)
+    created = Utils.date_from_pointer(invite) |> dump
 
     if invite.max_days_valid && invite.max_days_valid > 0 do
       expiry_date = DateTime.add(created, invite.max_days_valid*24*60*60, :second)
@@ -68,8 +68,8 @@ defmodule Bonfire.Invite.Links do
   end
 
   def expired?(%InviteLink{} = invite) do
-    created = Utils.date_from_pointer(invite)
-    date_expires = date_expires(invite)
+    created = Utils.date_from_pointer(invite) |> dump
+    date_expires = date_expires(invite) |> dump
 
     if date_expires do
       case DateTime.compare(date_expires, created) do
