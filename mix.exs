@@ -20,12 +20,7 @@ defmodule Bonfire.Invite.Links.MixProject do
     ]
   end
 
-  def application do
-    [
-      # mod: {Bonfire.Invite.Links.FallbackApplication, []},
-      extra_applications: [:logger, :runtime_tools]
-    ]
-  end
+  def application, do: [ extra_applications: [:logger, :runtime_tools] ]
 
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
