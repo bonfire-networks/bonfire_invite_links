@@ -1,5 +1,5 @@
 defmodule Bonfire.Invite.Links.Web.InvitesLive do
-  use Bonfire.Web, :stateful_component
+  use Bonfire.UI.Common.Web, :stateful_component
   import Bonfire.Invite.Links
 
   prop invites, :list, default: []
@@ -15,7 +15,7 @@ defmodule Bonfire.Invite.Links.Web.InvitesLive do
     }
   end
 
-  def handle_event(action, attrs, socket), do: Bonfire.Common.LiveHandlers.handle_event(action, attrs, socket, __MODULE__)
-  def handle_info(info, socket), do: Bonfire.Common.LiveHandlers.handle_info(info, socket, __MODULE__)
+  def handle_event(action, attrs, socket), do: Bonfire.UI.Common.LiveHandlers.handle_event(action, attrs, socket, __MODULE__)
+  def handle_info(info, socket), do: Bonfire.UI.Common.LiveHandlers.handle_info(info, socket, __MODULE__)
 
 end

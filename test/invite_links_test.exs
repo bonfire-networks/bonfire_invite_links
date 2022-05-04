@@ -1,7 +1,5 @@
 defmodule Bonfire.Invite.Links.Test do
-
-  use Bonfire.Social.ConnCase
-
+  use Bonfire.Invite.Links.ConnCase
 
   test "can create an invite" do
 

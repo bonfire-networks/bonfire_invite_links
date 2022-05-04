@@ -1,7 +1,5 @@
 defmodule Bonfire.Invite.Links.Web.Test do
-
-  use Bonfire.Social.ConnCase
-
+  use Bonfire.Invite.Links.ConnCase
 
   describe "generate an invite" do
 
@@ -15,10 +13,14 @@ defmodule Bonfire.Invite.Links.Web.Test do
 
       next = "/settings/admin/invites"
       {view, doc} = floki_live(conn, next) #|> debug
-      assert view
+
+      assert view = view
       |> form("[data-id='generate_invite_link']")
       |> render_submit(%{"invite_link" => %{"max_uses" => "", "max_days_valid" =>""}})
-      |> Floki.text() =~ "New invite generated"
+      |> find_flash()
+
+      assert [ok] = find_flash(view)
+      assert ok =~ "New invite generated"
 
     end
 

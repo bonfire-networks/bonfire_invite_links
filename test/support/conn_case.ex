@@ -22,6 +22,10 @@ defmodule Bonfire.Invite.Links.ConnCase do
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
+
+      use Bonfire.UI.Common
+      import Bonfire.UI.Common.Testing.Helpers
+
       import Phoenix.LiveViewTest
       import Bonfire.Invite.Links.ConnCase
 
@@ -30,6 +34,7 @@ defmodule Bonfire.Invite.Links.ConnCase do
 
       alias Bonfire.Invite.Links.Fake
       import Bonfire.Invite.Links.Fake
+      import Bonfire.Me.Fake
       # alias Bonfire.Invite.Links.Web.Router.Helpers, as: Routes
 
       # The default endpoint for testing
