@@ -3,15 +3,16 @@ defmodule Bonfire.Invite.Links.LiveHandler do
   import Where
 
   def handle_event("generate", %{"invite_link" => attrs}, socket) do
-    # debug(attrs, "attrs")
+    # info(socket, "attrs")
     with {:ok, invite} <-  Bonfire.Invite.Links.create(current_user(socket), attrs) do
-      # debug(invite)
+      socket = 
+        socket
+        |> put_flash(:info, "New invite generated!")
       {:noreply, socket
-        |> assign(
-          invites: [invite], #++ e(socket, :assigns, :invites, []),
+      |> assign(
+        invites: [invite], #++ e(socket, :assigns, :invites, []),
           feed_update_mode: "prepend"
           )
-        |> put_flash(:info, l "New invite generated!")
         }
     end
   end

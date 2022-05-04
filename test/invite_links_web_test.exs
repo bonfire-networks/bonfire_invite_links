@@ -16,11 +16,11 @@ defmodule Bonfire.Invite.Links.Web.Test do
 
       assert view = view
       |> form("[data-id='generate_invite_link']")
-      |> render_submit(%{"invite_link" => %{"max_uses" => "", "max_days_valid" =>""}})
-      |> find_flash()
+      |> render_submit(%{"invite_link" => %{"max_uses" => 7, "max_days_valid" => 1}})
+      # |> find_flash()
 
       assert [ok] = find_flash(view)
-      assert ok =~ "New invite generated"
+      assert ok |> Floki.text() =~ "New invite generated"
 
     end
 

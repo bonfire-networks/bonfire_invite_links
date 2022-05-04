@@ -6,7 +6,7 @@
 <div class="">
   <div class="pb-4 space-y-6 sm:space-y-5">
     <div class="p-4">
-    <Form for={:invite_link} opts={"data-id": "generate_invite_link"} submit="Bonfire.Invite.Links:generate" >
+    <Form for={:invite_link} opts={"data-id": "generate_invite_link", "phx-submit": "Bonfire.Invite.Links:generate"} >
       <h1 class="text-xl font-bold text-base-content">{l "Generate a new invite link"}</h1>
       <p>{l "Generate and share an invite link with others to grant access to this instance"}</p>
       <div class="mt-4">
@@ -48,9 +48,9 @@
           <table class="table w-full table-zebra">
             <thead>
               <tr>
-                <th>Link</th>
-                <th>Uses left</th>
-                <th>Expires</th>
+                <th>{l "Link"}</th>
+                <th>{l "Uses left"}</th>
+                <th>{l "Expires"}</th>
                 <th></th>
               </tr>
             </thead>
