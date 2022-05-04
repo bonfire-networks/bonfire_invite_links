@@ -27,14 +27,14 @@ defmodule Bonfire.Invite.Links.ConnCase do
       import Bonfire.UI.Common.Testing.Helpers
 
       import Phoenix.LiveViewTest
-      import Bonfire.Invite.Links.ConnCase
+      # import Bonfire.Invite.Links.ConnCase, async: true
 
       import Bonfire.Invite.Links.Test.ConnHelpers
       import Bonfire.Invite.Links.Test.FakeHelpers
 
       alias Bonfire.Invite.Links.Fake
       import Bonfire.Invite.Links.Fake
-      import Bonfire.Me.Fake
+
       # alias Bonfire.Invite.Links.Web.Router.Helpers, as: Routes
 
       # The default endpoint for testing

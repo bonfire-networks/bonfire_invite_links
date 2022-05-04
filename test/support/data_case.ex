@@ -23,7 +23,7 @@ defmodule Bonfire.Invite.Links.DataCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Bonfire.Invite.Links.DataCase
+      # import Bonfire.Invite.Links.DataCase
     end
   end
 

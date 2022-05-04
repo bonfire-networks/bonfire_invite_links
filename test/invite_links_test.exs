@@ -1,5 +1,5 @@
 defmodule Bonfire.Invite.Links.Test do
-  use Bonfire.Invite.Links.ConnCase
+  use Bonfire.Invite.Links.ConnCase, async: true
 
   test "can create an invite" do
 

@@ -1,5 +1,5 @@
 defmodule Bonfire.Invite.Links.Web.Test do
-  use Bonfire.Invite.Links.ConnCase
+  use Bonfire.Invite.Links.ConnCase, async: true
 
   describe "generate an invite" do
 
