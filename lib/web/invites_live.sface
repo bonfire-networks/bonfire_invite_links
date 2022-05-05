@@ -1,6 +1,5 @@
-<Bonfire.UI.Social.SettingsViewLive.SettingsHeaderLive 
-  settings_section_title={l "Invites"}
-  settings_section_description={""}
+<Bonfire.UI.Social.PageHeaderLive
+  page_title={l "Invites"}
 />
 
 <div class="">
