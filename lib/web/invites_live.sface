@@ -1,3 +1,7 @@
+<Bonfire.UI.Social.PageHeaderLive
+  page_title={l "Invites"}
+/>
+
 <div class="">
   <div class="pb-4 space-y-6 sm:space-y-5">
     <div class="p-4">
