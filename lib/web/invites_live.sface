@@ -93,7 +93,7 @@
           </table>
         </div>
 
-        <Bonfire.UI.Social.LoadMoreLive :if={e(assigns, :page_info, nil)} live_handler={Bonfire.Invite.Links} page_info={@page_info} target={@myself} />
+        <Bonfire.UI.Common.LoadMoreLive :if={e(assigns, :page_info, nil)} live_handler={Bonfire.Invite.Links} page_info={@page_info} target={@myself} />
 
     </div>
   </div>
