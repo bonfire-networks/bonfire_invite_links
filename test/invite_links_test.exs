@@ -87,7 +87,7 @@ defmodule Bonfire.Invite.Links.Test do
 
     {:ok, invite} = Bonfire.Invite.Links.create(someone, %{"max_uses" => 1, "max_days_valid" => 2})
 
-    assert invite |> Bonfire.Invite.Links.date_expires() |> date_relative() == "tomorrow"
+    assert invite |> Bonfire.Invite.Links.date_expires() |> date_from_now() == "tomorrow"
 
   end
 
