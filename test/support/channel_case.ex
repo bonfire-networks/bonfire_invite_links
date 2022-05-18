@@ -17,7 +17,7 @@ defmodule Bonfire.Invite.Links.ChannelCase do
 
   use ExUnit.CaseTemplate
 
-  import Bonfire.Invite.Links.Integration
+  # import Bonfire.Invite.Links.Integration
 
   using do
     quote do

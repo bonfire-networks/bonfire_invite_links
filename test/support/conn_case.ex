@@ -44,7 +44,7 @@ defmodule Bonfire.Invite.Links.ConnCase do
 
   setup tags do
 
-    import Bonfire.Invite.Links.Integration
+    # import Bonfire.Invite.Links.Integration
 
     Bonfire.Common.Test.Interactive.setup_test_repo(tags)
 
