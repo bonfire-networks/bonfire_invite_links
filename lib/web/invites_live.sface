@@ -16,7 +16,7 @@
             </Label>
             <div class="">
               <Select 
-              options={"No limits": "", "1": "1", "2": "2", "5": "5", "10": "10", "20": "20", "50": "50", "100": "100", "500": "500", "1000": "1000"}
+              options={Map.new([{l("No limits"), ""}, "1": "1", "2": "2", "5": "5", "10": "10", "20": "20", "50": "50", "100": "100", "500": "500", "1000": "1000"])}
               class="w-full select select-bordered"
               />
             </div>
@@ -28,7 +28,7 @@
             </Label>
             <div class="">
               <Select 
-              options={"Never": "", "1 day": "1", "2 days": "2", "1 week": "7", "2 weeks": "4", "1 month": "28", "6 months": "182", "1 year": "365"} 
+              options={Map.new([{l("Never"), ""}, {l("1 day"), "1"}, {l("2 days"), "2"}, {l("1 week"), "7"}, {l("2 weeks"), "4"}, {l("1 month"), "28"}, {l("6 months"), "182"}, {l("1 year"), "365"}])} 
               class="w-full select select-bordered"/>
             </div>
           </Field> 
