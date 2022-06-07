@@ -19,9 +19,9 @@ defmodule Bonfire.Invite.Links.Web.Test do
       |> render_submit(%{"invite_link" => %{"max_uses" => 7, "max_days_valid" => 1}})
       # |> find_flash()
 
+      live_pubsub_wait(view)
       assert [ok] = find_flash(view)
       assert ok |> Floki.text() =~ "New invite generated"
-
     end
 
     test "shows a new invite" do
