@@ -5,7 +5,6 @@ defmodule Bonfire.Invite.Links do
   use Arrows
 
   def create(user, attrs) do
-
     repo().transact_with(fn ->
       with {:ok, invite} <- repo().insert(InviteLink.changeset(attrs)) do
 
@@ -68,8 +67,8 @@ defmodule Bonfire.Invite.Links do
   end
 
   def expired?(%InviteLink{} = invite) do
-    created = Utils.date_from_pointer(invite) |> dump
-    date_expires = date_expires(invite) |> dump
+    created = Utils.date_from_pointer(invite) #|> dump
+    date_expires = date_expires(invite) #|> dump
 
     if date_expires do
       case DateTime.compare(date_expires, created) do
