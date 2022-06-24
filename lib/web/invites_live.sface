@@ -1,9 +1,5 @@
-<Bonfire.UI.Common.PageHeaderLive
-  page_title={l "Invites"}
-/>
-
 <div class="">
-  <div class="pb-4 space-y-6 sm:space-y-5">
+  <div class="pb-1 space-y-6 sm:space-y-5">
     <div class="p-4">
     <Form for={:invite_link} opts={"data-id": "generate_invite_link", "phx-submit": "Bonfire.Invite.Links:generate"} >
       <h1 class="text-xl font-bold text-base-content">{l "Generate a new invite link"}</h1>
