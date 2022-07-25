@@ -52,7 +52,7 @@
             <tbody
               id="invites_list" 
               data-id="invites_list" 
-              phx-update={e(assigns, :feed_update_mode, "prepend")}
+              phx-update={e(@feed_update_mode, "prepend")}
             >
               {#for invite <- @invites}
               <tr id={invite.id}>
@@ -89,7 +89,7 @@
           </table>
         </div>
 
-        <Bonfire.UI.Common.LoadMoreLive :if={e(assigns, :page_info, nil)} live_handler={Bonfire.Invite.Links} page_info={@page_info} target={@myself} />
+        <Bonfire.UI.Common.LoadMoreLive :if={e(@page_info, nil)} live_handler={Bonfire.Invite.Links} page_info={@page_info} target={@myself} />
 
     </div>
   </div>
