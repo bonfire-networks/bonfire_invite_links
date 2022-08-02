@@ -1,96 +1,103 @@
-<div class="">
-  <div class="pb-1 space-y-6 sm:space-y-5">
-    <div class="p-4">
-    <Form for={:invite_link} opts={"data-id": "generate_invite_link", "phx-submit": "Bonfire.Invite.Links:generate"} >
-      <h1 class="text-xl font-bold text-base-content">{l "Generate a new invite link"}</h1>
-      <p>{l "Generate and share an invite link with others to grant access to this instance"}</p>
-      <div class="mt-4">
-        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-          <Field name="max_uses" class="sm:col-span-3 form-control">
-            <Label class="label">
-              {l "Max number of uses"}
-            </Label>
-            <div class="">
-              <Select 
-              options={Map.new([{l("No limits"), ""}, "1": "1", "2": "2", "5": "5", "10": "10", "20": "20", "50": "50", "100": "100", "500": "500", "1000": "1000"])}
-              class="w-full select select-bordered"
-              />
-            </div>
-          </Field>
+<div class="pb-1 space-y-6 sm:space-y-5">
 
-          <Field name="max_days_valid" class="sm:col-span-3">
-            <Label class="label">
-              {l "Expire after"}
-            </Label>
-            <div class="">
-              <Select 
-              options={Map.new([{l("Never"), ""}, {l("1 day"), "1"}, {l("2 days"), "2"}, {l("1 week"), "7"}, {l("2 weeks"), "4"}, {l("1 month"), "28"}, {l("6 months"), "182"}, {l("1 year"), "365"}])} 
-              class="w-full select select-bordered"/>
-            </div>
-          </Field> 
-        </div>
-        <div class="mt-4">
-          <button class="w-full btn btn-primary btn-wide">
-            {l "Generate a new invite link"}
-          </button>
-        </div>
+  {#if !Settings.get(:invite_only, nil, :instance) or Bonfire.Boundaries.can?(@__context__, :invite, :instance) }
+
+  <div class="p-4">
+  <Form for={:invite_link} opts={"data-id": "generate_invite_link", "phx-submit": "Bonfire.Invite.Links:generate"} >
+    <h1 class="text-xl font-bold text-base-content">{l "Generate a new invite link"}</h1>
+    <p>{l "Generate and share an invite link with others to grant access to this instance"}</p>
+    <div class="mt-4">
+      <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+        <Field name="max_uses" class="sm:col-span-3 form-control">
+          <Label class="label">
+            {l "Max number of uses"}
+          </Label>
+          <div class="">
+            <Select 
+            options={Map.new([{l("No limits"), ""}, "1": "1", "2": "2", "5": "5", "10": "10", "20": "20", "50": "50", "100": "100", "500": "500", "1000": "1000"])}
+            class="w-full select select-bordered"
+            />
+          </div>
+        </Field>
+
+        <Field name="max_days_valid" class="sm:col-span-3">
+          <Label class="label">
+            {l "Expire after"}
+          </Label>
+          <div class="">
+            <Select 
+            options={Map.new([{l("Never"), ""}, {l("1 day"), "1"}, {l("2 days"), "2"}, {l("1 week"), "7"}, {l("2 weeks"), "4"}, {l("1 month"), "28"}, {l("6 months"), "182"}, {l("1 year"), "365"}])} 
+            class="w-full select select-bordered"/>
+          </div>
+        </Field> 
       </div>
-    </Form>
+      <div class="mt-4">
+        <button class="w-full btn btn-primary btn-wide">
+          {l "Generate a new invite link"}
+        </button>
+      </div>
     </div>
-    <div class="px-4 divider">{l "Existing invites"}</div>
-    <div class="p-4">
-        <div class="overflow-x-auto">
-          <table class="table w-full table-zebra">
-            <thead>
-              <tr>
-                <th>{l "Link"}</th>
-                <th>{l "Uses left"}</th>
-                <th>{l "Expires"}</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody
-              id="invites_list" 
-              data-id="invites_list" 
-              phx-update={e(@feed_update_mode, "prepend")}
-            >
-              {#for invite <- @invites}
-              <tr id={invite.id}>
-                <td class="">
-                  <div class="form-control">
-                    <div class="relative">
-                      <input
-                        readonly
-                        type="text"
-                        value={url(:invite, invite.id)}
-                        class="w-full input input-primary input-bordered"
-                      >
-                    </div>
-                  </div>
-                </td> 
-                <td>
-                  <span class="text-sm text-base-content">{e(invite, :max_uses, "Unlimited")}</span>
-                </td> 
-                <td>
-                
-                  <span :if={e(invite, :max_days_valid, 0)>0} class="text-sm text-base-content">{if expired?(invite), do: l("expired"), else: date_from_now(date_expires(invite))}</span>
-                  <span :if={e(invite, :max_days_valid, 0)==0} class="text-sm text-base-content">{l "never"}</span>
-                
-                </td>
-                <th>
-                  <button class="flex items-center btn btn-ghost btn-sm">
-                  <Outline.TrashIcon />
-                  </button>
-                </th>
-              </tr>
-              {/for}
-              
-            </tbody>
-          </table>
-        </div>
-
-        <Bonfire.UI.Common.LoadMoreLive :if={e(@page_info, nil)} live_handler={Bonfire.Invite.Links} page_info={@page_info} target={@myself} />
-
-    </div>
+  </Form>
   </div>
+
+  <div class="px-4 divider">{l "Existing invites"}</div>
+  <div class="p-4">
+    <div class="overflow-x-auto">
+      <table class="table w-full table-zebra">
+        <thead>
+          <tr>
+            <th>{l "Link"}</th>
+            <th>{l "Uses left"}</th>
+            <th>{l "Expires"}</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody
+          id="invites_list" 
+          data-id="invites_list" 
+          phx-update={e(@feed_update_mode, "prepend")}
+        >
+          {#for invite <- @invites}
+          <tr id={invite.id}>
+            <td class="">
+              <div class="form-control">
+                <div class="relative">
+                  <input
+                    readonly
+                    type="text"
+                    value={url(:invite, invite.id)}
+                    class="w-full input input-primary input-bordered"
+                  >
+                </div>
+              </div>
+            </td> 
+            <td>
+              <span class="text-sm text-base-content">{e(invite, :max_uses, "Unlimited")}</span>
+            </td> 
+            <td>
+            
+              <span :if={e(invite, :max_days_valid, 0)>0} class="text-sm text-base-content">{if expired?(invite), do: l("expired"), else: date_from_now(date_expires(invite))}</span>
+              <span :if={e(invite, :max_days_valid, 0)==0} class="text-sm text-base-content">{l "never"}</span>
+            
+            </td>
+            <th>
+              <button class="flex items-center btn btn-ghost btn-sm">
+              <Outline.TrashIcon />
+              </button>
+            </th>
+          </tr>
+          {/for}
+          
+        </tbody>
+      </table>
+    </div>
+
+    <Bonfire.UI.Common.LoadMoreLive :if={e(@page_info, nil)} live_handler={Bonfire.Invite.Links} page_info={@page_info} target={@myself} />
+
+  </div>
+
+  {#else}
+    {l "You cannot invite others, sorry!"}
+  {/if}
+
 </div>

@@ -11,7 +11,7 @@ defmodule Bonfire.Invite.Links.Web.Test do
 
       conn = conn(user: someone, account: some_account)
 
-      next = "/settings/admin/invites"
+      next = "/settings/invites"
       {view, doc} = floki_live(conn, next) #|> debug
 
       assert submitted = view
@@ -32,7 +32,7 @@ defmodule Bonfire.Invite.Links.Web.Test do
 
       conn = conn(user: someone, account: some_account)
 
-      next = "/settings/admin/invites"
+      next = "/settings/invites"
       {view, doc} = floki_live(conn, next) #|> debug
       assert view
       |> form("[data-id='generate_invite_link']")
@@ -53,7 +53,7 @@ defmodule Bonfire.Invite.Links.Web.Test do
       Bonfire.Invite.Links.create(someone, %{"max_uses" => 1, "max_days_valid" => 1})
       Bonfire.Invite.Links.create(someone, %{"max_uses" => 1, "max_days_valid" => 1})
 
-      next = "/settings/admin/invites"
+      next = "/settings/invites"
       {view, doc} = floki_live(conn, next)
 
       assert doc
