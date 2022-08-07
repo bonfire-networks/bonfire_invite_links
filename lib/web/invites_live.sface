@@ -82,7 +82,7 @@
             </td>
             <th>
               <button class="flex items-center btn btn-ghost btn-sm">
-              <Outline.TrashIcon />
+              <Icon outline="Trash" />
               </button>
             </th>
           </tr>
