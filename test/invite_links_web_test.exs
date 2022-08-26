@@ -36,8 +36,8 @@ defmodule Bonfire.Invite.Links.Web.Test do
       {view, doc} = floki_live(conn, next) #|> debug
       assert view
       |> form("[data-id='generate_invite_link']")
-      |> render_submit(%{"invite_link" => %{"max_uses" => 7, "max_days_valid" => 1}})
-      |> Floki.text() =~ "7in 23 hours"
+      |> render_submit(%{"invite_link" => %{"max_uses" => 5, "max_days_valid" => 1}})
+      |> Floki.text() =~ "23 hours"
     end
 
     test "shows a list of invites" do
