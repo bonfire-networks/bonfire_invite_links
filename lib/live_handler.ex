@@ -1,6 +1,6 @@
 defmodule Bonfire.Invite.Links.LiveHandler do
   use Bonfire.UI.Common.Web, :live_handler
-  import Where
+  import Untangle
 
   def handle_event("generate", %{"invite_link" => attrs}, socket) do
     # info(socket, "attrs")
