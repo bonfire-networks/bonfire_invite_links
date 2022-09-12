@@ -1,5 +1,4 @@
 defmodule Bonfire.InviteLink do
-
   use Pointers.Pointable,
     otp_app: :bonfire_invite_links,
     table_id: "1NV1TE11NKF0RJ01N1NGB0NF1R",
@@ -9,17 +8,15 @@ defmodule Bonfire.InviteLink do
   alias Ecto.Changeset
 
   pointable_schema do
-    field :max_uses, :integer
-    field :max_days_valid, :integer
+    field(:max_uses, :integer)
+    field(:max_days_valid, :integer)
   end
 
   @cast [:max_uses, :max_days_valid]
 
   def changeset(obj \\ %InviteLink{}, params) do
-    obj
-    |> Changeset.cast(params, @cast)
+    Changeset.cast(obj, params, @cast)
   end
-
 end
 
 defmodule Bonfire.Invites.Link.Migration do
@@ -28,12 +25,11 @@ defmodule Bonfire.Invites.Link.Migration do
   alias Bonfire.InviteLink
 
   def up() do
-    Pointers.Migration.create_pointable_table(Bonfire.InviteLink) do
-      Ecto.Migration.add :max_uses, :integer
-      Ecto.Migration.add :max_days_valid, :integer
+    Pointers.Migration.create_pointable_table Bonfire.InviteLink do
+      Ecto.Migration.add(:max_uses, :integer)
+      Ecto.Migration.add(:max_days_valid, :integer)
     end
   end
 
   def down(), do: drop_if_exists(table(InviteLink))
-
 end

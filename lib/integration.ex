@@ -4,6 +4,4 @@ defmodule Bonfire.Invite.Links.Integration do
   import Untangle
 
   def repo, do: Config.get!(:repo_module)
-
-
 end

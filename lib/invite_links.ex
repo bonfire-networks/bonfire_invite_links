@@ -7,14 +7,14 @@ defmodule Bonfire.Invite.Links do
   def create(user, attrs) do
     repo().transact_with(fn ->
       with {:ok, invite} <- repo().insert(InviteLink.changeset(attrs)) do
-
         {:ok, invite}
       end
     end)
   end
 
   def redeem(%InviteLink{} = invite) do
-    if !redeemable?(invite), do: raise l "Sorry, this invite is no longer valid."
+    if !redeemable?(invite),
+      do: raise(l("Sorry, this invite is no longer valid."))
 
     from(r in InviteLink,
       update: [inc: [max_uses: -1]],
@@ -22,9 +22,11 @@ defmodule Bonfire.Invite.Links do
     )
     |> repo().update_all([])
   end
+
   def redeem(invite_id) when is_binary(invite_id) do
     get(invite_id) ~> redeem()
   end
+
   def redeem(_) do
     nil
   end
@@ -44,14 +46,14 @@ defmodule Bonfire.Invite.Links do
   end
 
   def list_paginated(filters, opts \\ []) do
-
     query(filters, opts)
-      |> Bonfire.Common.Repo.many_paginated(opts[:paginate]) # return a page of items (reverse chronological) + pagination metadata
+    # return a page of items (reverse chronological) + pagination metadata
+    |> Bonfire.Common.Repo.many_paginated(opts[:paginate])
   end
 
   def redeemable?(%InviteLink{} = invite) do
-    (is_nil(invite.max_uses) or invite.max_uses > 0)
-      and !expired?(invite)
+    (is_nil(invite.max_uses) or invite.max_uses > 0) and
+      !expired?(invite)
   end
 
   def redeemable?(invite_id) when is_binary(invite_id) do
@@ -59,23 +61,28 @@ defmodule Bonfire.Invite.Links do
   end
 
   def date_expires(%InviteLink{} = invite) do
-    created = Utils.date_from_pointer(invite) |> dump
+    created = Utils.date_from_pointer(invite)
+    # |> debug()
 
     if invite.max_days_valid && invite.max_days_valid > 0 do
-      expiry_date = DateTime.add(created, invite.max_days_valid*24*60*60, :second)
+      expiry_date = DateTime.add(created, invite.max_days_valid * 24 * 60 * 60, :second)
     end
   end
 
   def expired?(%InviteLink{} = invite) do
-    created = Utils.date_from_pointer(invite) #|> dump
-    date_expires = date_expires(invite) #|> dump
+    # |> debug
+    created = Utils.date_from_pointer(invite)
+    # |> debug
+    date_expires = date_expires(invite)
 
+    # no limit
     if date_expires do
       case DateTime.compare(date_expires, created) do
-        :gt -> false # expiry_date > created == not expired
+        # expiry_date > created == not expired
+        :gt -> false
         _other -> true
       end
-    else # no limit
+    else
       false
     end
   end
