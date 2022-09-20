@@ -1,5 +1,5 @@
 <div class="pb-1 space-y-6 sm:space-y-5">
-  {#if !Settings.get(:invite_only, nil, :instance) or
+  {#if !Config.get(:invite_only, nil) or
       Bonfire.Boundaries.can?(@__context__, :invite, :instance)}
     <div class="p-4">
       <Form
