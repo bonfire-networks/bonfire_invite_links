@@ -48,7 +48,7 @@ defmodule Bonfire.Invite.Links do
   def list_paginated(filters, opts \\ []) do
     query(filters, opts)
     # return a page of items (reverse chronological) + pagination metadata
-    |> Bonfire.Common.Repo.many_paginated(opts[:paginate])
+    |> repo().many_paginated(opts[:paginate])
   end
 
   def redeemable?(%InviteLink{} = invite) do
