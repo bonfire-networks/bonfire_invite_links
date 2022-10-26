@@ -5,7 +5,7 @@ defmodule Bonfire.Invite.Links.LiveHandler do
   def handle_event("generate", %{"invite_link" => attrs}, socket) do
     # info(socket, "attrs")
     with {:ok, invite} <-
-           Bonfire.Invite.Links.create(current_user_required(socket), attrs) do
+           Bonfire.Invite.Links.create(current_user_required!(socket), attrs) do
       socket = assign_flash(socket, :info, "New invite generated!")
 
       {:noreply,
