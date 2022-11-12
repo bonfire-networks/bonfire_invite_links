@@ -87,7 +87,7 @@
                       <input
                         readonly
                         type="text"
-                        value={url(:invite, invite.id)}
+                        value={url_path(:invite, invite.id)}
                         class="w-full input input-primary input-bordered"
                       />
                     </div>
