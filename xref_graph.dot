@@ -1,0 +1,13 @@
+digraph "xref graph" {
+  "lib/fake.ex"
+  "lib/integration.ex"
+  "lib/invite_link_schema.ex"
+  "lib/invite_links.ex"
+  "lib/invite_links.ex" -> "lib/invite_link_schema.ex" [label="(export)"]
+  "lib/live_handler.ex"
+  "lib/live_handler.ex" -> "lib/invite_links.ex"
+  "lib/migrations.ex"
+  "lib/web/invites_live.ex"
+  "lib/web/invites_live.ex" -> "lib/invite_links.ex" [label="(export)"]
+  "lib/web/routes.ex"
+}
