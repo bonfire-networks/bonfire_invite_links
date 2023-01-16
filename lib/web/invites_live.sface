@@ -2,16 +2,11 @@
   {#if !Config.get(:invite_only, nil) or
       Bonfire.Boundaries.can?(@__context__, :invite, :instance)}
     <div class="">
-      <div class="flex items-center justify-between py-8 mb-6">
-        <div class="text-2xl font-bold text-base-content">
-          {l("Generate a new invite link")}
-        </div>
-      </div>
       <Form
         for={:invite_link}
         opts={"data-id": "generate_invite_link", "phx-submit": "Bonfire.Invite.Links:generate"}
       >
-        <div class="p-4 mt-4 rounded shadow bg-base-200">
+        <div class="p-4">
           <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
             <Field name="max_uses" class="sm:col-span-3 form-control">
               <Label class="label">
@@ -58,7 +53,7 @@
             </Field>
           </div>
           <div class="mt-4">
-            <button class="w-full btn btn-primary btn-wide">
+            <button class="w-full normal-case btn btn-primary btn-wide">
               {l("Generate a new invite link")}
             </button>
           </div>
@@ -67,7 +62,7 @@
     </div>
 
     <div class="px-4 divider">{l("Existing invites")}</div>
-    <div class="p-4 rounded shadow bg-base-200">
+    <div class="">
       <div class="overflow-x-auto">
         <table class="table w-full table-zebra">
           <thead>
