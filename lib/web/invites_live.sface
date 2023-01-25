@@ -92,7 +92,7 @@
                   <span class="text-sm text-base-content">{e(invite, :max_uses, "Unlimited")}</span>
                 </td>
                 <td>
-                  <span :if={e(invite, :max_days_valid, 0) > 0} class="text-sm text-base-content">{if expired?(invite), do: l("expired"), else: date_from_now(date_expires(invite))}</span>
+                  <span :if={e(invite, :max_days_valid, 0) > 0} class="text-sm text-base-content">{if expired?(invite), do: l("expired"), else: DatesTimes.date_from_now(date_expires(invite))}</span>
                   <span :if={e(invite, :max_days_valid, 0) == 0} class="text-sm text-base-content">{l("never")}</span>
                 </td>
                 <th>

@@ -117,7 +117,7 @@ defmodule Bonfire.Invite.Links.Test do
         "max_days_valid" => 2
       })
 
-    assert invite |> Bonfire.Invite.Links.date_expires() |> date_from_now() ==
+    assert invite |> Bonfire.Invite.Links.date_expires() |> DatesTimes.date_from_now() ==
              "tomorrow"
   end
 
