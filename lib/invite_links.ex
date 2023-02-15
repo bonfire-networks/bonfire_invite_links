@@ -4,7 +4,7 @@ defmodule Bonfire.Invite.Links do
   use Bonfire.Common.Utils
   use Arrows
 
-  def create(user, attrs) do
+  def create(_user, attrs) do
     repo().transact_with(fn ->
       with {:ok, invite} <- repo().insert(InviteLink.changeset(attrs)) do
         {:ok, invite}
