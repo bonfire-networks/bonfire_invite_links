@@ -65,7 +65,7 @@ defmodule Bonfire.Invite.Links do
     # |> debug()
 
     if invite.max_days_valid && invite.max_days_valid > 0 do
-      expiry_date = DateTime.add(created, invite.max_days_valid * 24 * 60 * 60, :second)
+      DateTime.add(created, invite.max_days_valid * 24 * 60 * 60, :second)
     end
   end
 

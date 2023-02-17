@@ -21,7 +21,7 @@ end
 
 defmodule Bonfire.Invites.Link.Migration do
   use Ecto.Migration
-  # import Pointers.Migration
+  require Pointers.Migration
   alias Bonfire.InviteLink
 
   def up() do
