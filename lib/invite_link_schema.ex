@@ -20,6 +20,7 @@ defmodule Bonfire.InviteLink do
 end
 
 defmodule Bonfire.Invites.Link.Migration do
+  @moduledoc false
   use Ecto.Migration
   require Pointers.Migration
   alias Bonfire.InviteLink
