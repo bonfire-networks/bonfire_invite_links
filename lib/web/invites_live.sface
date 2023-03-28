@@ -97,7 +97,7 @@
                 </td>
                 <th>
                   <button class="flex items-center btn btn-ghost btn-sm">
-                    <Icon outline="Trash" />
+                    <#Icon outline="Trash" />
                   </button>
                 </th>
               </tr>
