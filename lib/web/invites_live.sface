@@ -3,7 +3,8 @@
       Bonfire.Boundaries.can?(@__context__, :invite, :instance)}
     <div class="">
       <Form
-        for={:invite_link}
+        for={%{}}
+        as={:invite_link}
         opts={"data-id": "generate_invite_link", "phx-submit": "Bonfire.Invite.Links:generate"}
       >
         <div class="p-4">
