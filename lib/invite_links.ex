@@ -79,8 +79,8 @@ defmodule Bonfire.Invite.Links do
     if date_expires do
       case DateTime.compare(date_expires, created) do
         # expiry_date > created == not expired
-        1 -> false
-        _other -> true
+        :gt -> true
+        _other -> false
       end
     else
       false
