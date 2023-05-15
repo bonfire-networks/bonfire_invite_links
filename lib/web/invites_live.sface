@@ -63,13 +63,13 @@
     </div>
 
     <div class="px-4 divider">{l("Existing invites")}</div>
-    <div class="">
+    <div class="mx-3">
       <div class="overflow-x-auto">
         <table class="table w-full table-zebra">
           <thead>
             <tr>
               <th>{l("Link")}</th>
-              <th>{l("Uses left")}</th>
+              <th class="text-center">{l("Uses left")}</th>
               <th>{l("Expires")}</th>
               <th />
             </tr>
@@ -81,24 +81,34 @@
                   <div class="form-control">
                     <div class="relative">
                       <input
+                        id={"invite_#{invite.id}"}
                         readonly
                         type="text"
                         value={url_path(:invite, invite.id)}
-                        class="w-full input input-primary input-bordered"
+                        class="w-full input input-sm text-xs  input-bordered rounded bg-base-content/5"
                       />
+                      <button class="absolute text-xs font-semibold z-30 right-0 top-0 btn btn-accent btn-sm normal-case border-l border-base-content/30 rounded rounded-l-none" id="copy" data-to={"invite_#{invite.id}"} phx-hook="Copy">  
+                        {l"Copy"}
+                      </button>
+
                     </div>
                   </div>
                 </td>
                 <td>
-                  <span class="text-sm text-base-content">{e(invite, :max_uses, "Unlimited")}</span>
+                  <span class="text-sm block text-center font-bold text-base-content">{e(invite, :max_uses, "Unlimited")}</span>
                 </td>
                 <td>
-                  <span :if={e(invite, :max_days_valid, 0) > 0} class="text-sm text-base-content">{if expired?(invite), do: l("expired"), else: DatesTimes.date_from_now(date_expires(invite))}</span>
-                  <span :if={e(invite, :max_days_valid, 0) == 0} class="text-sm text-base-content">{l("never")}</span>
+                  <span 
+                    :if={e(invite, :max_days_valid, 0) > 0} 
+                    class={
+                      "badge badge-info",
+                      "!badge-error": expired?(invite)}
+                    >{if expired?(invite), do: l("expired"), else: DatesTimes.date_from_now(date_expires(invite))}</span>
+                  <span :if={e(invite, :max_days_valid, 0) == 0} class="badge badge-info">{l("never")}</span>
                 </td>
-                <th>
-                  <button class="flex items-center btn btn-ghost btn-sm">
-                    <#Icon outline="Trash" />
+                <th class="flex-1 shrink-0">
+                  <button class="flex items-center btn btn-square btn-ghost btn-sm">
+                    <#Icon outline="Trash" class="w-4 h-4" />
                   </button>
                 </th>
               </tr>
