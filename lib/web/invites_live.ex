@@ -13,7 +13,7 @@ defmodule Bonfire.Invite.Links.Web.InvitesLive do
        invites: invites,
        page_info: page_info,
        feed_update_mode: "append"
-      )}
+     )}
   end
 
   def handle_event(

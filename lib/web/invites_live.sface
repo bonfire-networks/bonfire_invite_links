@@ -87,10 +87,14 @@
                         value={url_path(:invite, invite.id)}
                         class="w-full input input-sm text-xs  input-bordered rounded bg-base-content/5"
                       />
-                      <button class="absolute text-xs font-semibold z-30 right-0 top-0 btn btn-accent btn-sm normal-case border-l border-base-content/30 rounded rounded-l-none" id="copy" data-to={"invite_#{invite.id}"} phx-hook="Copy">  
-                        {l"Copy"}
+                      <button
+                        class="absolute text-xs font-semibold z-30 right-0 top-0 btn btn-accent btn-sm normal-case border-l border-base-content/30 rounded rounded-l-none"
+                        id="copy"
+                        data-to={"invite_#{invite.id}"}
+                        phx-hook="Copy"
+                      >
+                        {l("Copy")}
                       </button>
-
                     </div>
                   </div>
                 </td>
@@ -98,12 +102,13 @@
                   <span class="text-sm block text-center font-bold text-base-content">{e(invite, :max_uses, "Unlimited")}</span>
                 </td>
                 <td>
-                  <span 
-                    :if={e(invite, :max_days_valid, 0) > 0} 
+                  <span
+                    :if={e(invite, :max_days_valid, 0) > 0}
                     class={
                       "badge badge-info",
-                      "!badge-error": expired?(invite)}
-                    >{if expired?(invite), do: l("expired"), else: DatesTimes.date_from_now(date_expires(invite))}</span>
+                      "!badge-error": expired?(invite)
+                    }
+                  >{if expired?(invite), do: l("expired"), else: DatesTimes.date_from_now(date_expires(invite))}</span>
                   <span :if={e(invite, :max_days_valid, 0) == 0} class="badge badge-info">{l("never")}</span>
                 </td>
                 <th class="flex-1 shrink-0">
