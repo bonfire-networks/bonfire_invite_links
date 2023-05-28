@@ -127,6 +127,7 @@
         live_handler={Bonfire.Invite.Links}
         page_info={@page_info}
         target={@myself}
+        context={:invites}
       />
     </div>
   {#else}
