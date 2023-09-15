@@ -109,7 +109,7 @@
                       "!badge-error": expired?(invite)
                     }
                   >{if expired?(invite), do: l("expired"), else: DatesTimes.date_from_now(date_expires(invite))}</span>
-                  <span :if={e(invite, :max_days_valid, 0) == 0} class="badge badge-info">{l("never")}</span>
+                  <span data-role="expiration_time" :if={e(invite, :max_days_valid, 0) == 0} class="badge badge-info">{l("never")}</span>
                 </td>
                 <th class="flex-1 shrink-0">
                   <button class="flex items-center btn btn-square btn-ghost btn-sm">

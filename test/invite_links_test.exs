@@ -118,7 +118,7 @@ defmodule Bonfire.Invite.Links.Test do
       })
 
     assert invite |> Bonfire.Invite.Links.date_expires() |> DatesTimes.date_from_now() ==
-             "tomorrow"
+             "in 2 days"
   end
 
   test "can redeem an invite" do

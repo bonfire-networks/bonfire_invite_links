@@ -11,9 +11,10 @@ defmodule Bonfire.Invite.Links.Web.Test do
 
       conn = conn(user: someone, account: some_account)
 
-      next = "/settings/invites"
+      next = "/settings/instance/invites"
       # |> debug
-      {view, doc} = floki_live(conn, next)
+      # {view, doc} = floki_live(conn, next)
+      {:ok, view, _html} = live(conn, next)
 
       assert submitted =
                view
@@ -38,7 +39,7 @@ defmodule Bonfire.Invite.Links.Web.Test do
 
       conn = conn(user: someone, account: some_account)
 
-      next = "/settings/invites"
+      next = "/settings/instance/invites"
       # |> debug
       {view, doc} = floki_live(conn, next)
 
@@ -47,7 +48,11 @@ defmodule Bonfire.Invite.Links.Web.Test do
              |> render_submit(%{
                "invite_link" => %{"max_uses" => 5, "max_days_valid" => 1}
              })
-             |> Floki.text() =~ "23 hours"
+
+      live_pubsub_wait(view)
+      {:ok, view, _html} = live(conn, next)
+      # open_browser(view)
+      assert has_element?(view, "span", "in 24 hours")
     end
 
     test "shows a list of invites" do
@@ -58,7 +63,6 @@ defmodule Bonfire.Invite.Links.Web.Test do
         |> Bonfire.Me.Users.make_admin()
 
       conn = conn(user: someone, account: some_account)
-
       Bonfire.Invite.Links.create(someone, %{
         "max_uses" => 1,
         "max_days_valid" => 1
@@ -69,23 +73,13 @@ defmodule Bonfire.Invite.Links.Web.Test do
         "max_days_valid" => 1
       })
 
-      Bonfire.Invite.Links.create(someone, %{
-        "max_uses" => 1,
-        "max_days_valid" => 1
-      })
-
-      Bonfire.Invite.Links.create(someone, %{
-        "max_uses" => 1,
-        "max_days_valid" => 1
-      })
-
-      next = "/settings/invites"
+      next = "/settings/instance/invites"
       {view, doc} = floki_live(conn, next)
 
       assert doc
              |> Floki.find("#invites_list tr")
              # |> debug
-             |> Enum.count() == 4
+             |> Enum.count() == 2
     end
   end
 end
