@@ -63,6 +63,7 @@ defmodule Bonfire.Invite.Links.Web.Test do
         |> Bonfire.Me.Users.make_admin()
 
       conn = conn(user: someone, account: some_account)
+
       Bonfire.Invite.Links.create(someone, %{
         "max_uses" => 1,
         "max_days_valid" => 1
