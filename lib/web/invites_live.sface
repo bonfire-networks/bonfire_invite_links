@@ -1,6 +1,6 @@
 <div class="">
   {#if !Config.get(:invite_only, nil) or
-      Bonfire.Boundaries.can?(@__context__, :invite, :instance)}
+    can?(@__context__, :invite, :instance)}
     <div class="">
       <Form
         for={%{}}
