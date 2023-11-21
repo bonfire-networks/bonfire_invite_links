@@ -1,11 +1,15 @@
-<div class="">
+<div id="bonfire_invites" class="">
   {#if !Config.get(:invite_only, nil) or
       can?(@__context__, :invite, :instance)}
     <div class="">
       <Form
         for={%{}}
         as={:invite_link}
-        opts={"data-id": "generate_invite_link", "phx-submit": "Bonfire.Invite.Links:generate"}
+        opts={
+          "data-id": "generate_invite_link",
+          "phx-target": "#bonfire_invites",
+          "phx-submit": "Bonfire.Invite.Links:generate"
+        }
       >
         <div class="p-4">
           <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -54,7 +58,7 @@
             </Field>
           </div>
           <div class="mt-4">
-            <button class="w-full normal-case btn btn-primary btn-wide">
+            <button class="w-full normal-case btn btn-primary border-primary/30 btn-outline rounded-full btn-wide">
               {l("Generate a new invite link")}
             </button>
           </div>
@@ -79,22 +83,22 @@
               <tr id={invite.id}>
                 <td class="">
                   <div class="form-control">
-                    <div class="relative">
+                    <div class="flex items-center">
                       <input
                         id={"invite_#{invite.id}"}
                         readonly
                         type="text"
                         value={url_path(:invite, invite.id)}
-                        class="w-full input input-sm text-xs  input-bordered rounded bg-base-content/5"
+                        class="w-full input text-sm  input-bordered  rounded-r-none border-r-0 rounded bg-base-content/5"
                       />
-                      <button
-                        class="absolute text-xs font-semibold z-30 right-0 top-0 btn btn-accent btn-sm normal-case border-l border-base-content/30 rounded rounded-l-none"
-                        id="copy"
-                        data-to={"invite_#{invite.id}"}
-                        phx-hook="Copy"
-                      >
-                        {l("Copy")}
-                      </button>
+                      <div class="h-[48px] px-2 flex items-center place-content-center border border-l-0 border-base-content/30 rounded-l-none">
+                        <div id="copy" data-to={"invite_#{invite.id}"} phx-hook="Copy" class="flex items-center">
+                          <button class="btn-ghost z-30 right-2 top-2 btn btn-sm btn-square">
+                            <#Icon iconify="carbon:copy" class="w-5 h-5" />
+                            <span class="sr-only">{l("Copy")}</span>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </td>
@@ -105,10 +109,13 @@
                   <span
                     :if={e(invite, :max_days_valid, 0) > 0}
                     class={
-                      "badge badge-info",
-                      "!badge-error": expired?(invite)
+                      "flex items-center font-medium gap-2",
+                      "text-error": expired?(invite)
                     }
-                  >{if expired?(invite), do: l("expired"), else: DatesTimes.date_from_now(date_expires(invite))}</span>
+                  >
+                    <#Icon iconify="basil:clock-outline" class="w-5 h-5 shrink-0 text-base-content/80" />
+                    {if expired?(invite), do: l("expired"), else: DatesTimes.date_from_now(date_expires(invite))}
+                  </span>
                   <span
                     data-role="expiration_time"
                     :if={e(invite, :max_days_valid, 0) == 0}
@@ -116,7 +123,7 @@
                   >{l("never")}</span>
                 </td>
                 <th class="flex-1 shrink-0">
-                  <button class="flex items-center btn btn-square btn-ghost btn-sm">
+                  <button class="flex items-center btn btn-error btn-square  btn-sm">
                     <#Icon outline="Trash" class="w-4 h-4" />
                   </button>
                 </th>

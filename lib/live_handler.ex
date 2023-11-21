@@ -3,16 +3,18 @@ defmodule Bonfire.Invite.Links.LiveHandler do
   import Untangle
 
   def handle_event("generate", %{"invite_link" => attrs}, socket) do
-    # info(socket, "attrs")
+    info(socket, "ccccc")
+
     with {:ok, invite} <-
            Bonfire.Invite.Links.create(current_user_required!(socket), attrs) do
       socket = assign_flash(socket, :info, "New invite generated!")
+      invites = [invite | socket.assigns.invites]
 
       {:noreply,
        assign(
          socket,
          # ++ e(socket, :assigns, :invites, []),
-         invites: [invite],
+         invites: invites,
          feed_update_mode: "prepend"
        )}
     end

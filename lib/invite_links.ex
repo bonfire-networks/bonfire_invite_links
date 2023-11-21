@@ -74,7 +74,6 @@ defmodule Bonfire.Invite.Links do
     created = DatesTimes.date_from_pointer(invite)
     # |> debug
     date_expires = date_expires(invite)
-
     # no limit
     if date_expires do
       case DateTime.compare(date_expires, created) do
