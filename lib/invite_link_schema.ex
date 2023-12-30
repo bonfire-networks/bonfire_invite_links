@@ -1,5 +1,5 @@
 defmodule Bonfire.InviteLink do
-  use Pointers.Pointable,
+  use Needle.Pointable,
     otp_app: :bonfire_invite_links,
     table_id: "1NV1TE11NKF0RJ01N1NGB0NF1R",
     source: "bonfire_invite_link"
@@ -22,11 +22,11 @@ end
 defmodule Bonfire.Invites.Link.Migration do
   @moduledoc false
   use Ecto.Migration
-  require Pointers.Migration
+  require Needle.Migration
   alias Bonfire.InviteLink
 
   def up() do
-    Pointers.Migration.create_pointable_table Bonfire.InviteLink do
+    Needle.Migration.create_pointable_table Bonfire.InviteLink do
       Ecto.Migration.add(:max_uses, :integer)
       Ecto.Migration.add(:max_days_valid, :integer)
     end
