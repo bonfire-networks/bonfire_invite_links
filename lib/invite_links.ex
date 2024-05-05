@@ -1,4 +1,6 @@
 defmodule Bonfire.Invite.Links do
+  @moduledoc "./README.md" |> File.stream!() |> Enum.drop(1) |> Enum.join()
+
   use Bonfire.Common.Repo
   alias Bonfire.InviteLink
   use Bonfire.Common.Utils
