@@ -1,5 +1,6 @@
 defmodule Bonfire.Invite.Links.Web.Test do
   use Bonfire.Invite.Links.ConnCase, async: true
+  @moduletag :ui
 
   describe "generate an invite" do
     test "returns a flash confirmation" do

@@ -1,5 +1,6 @@
 defmodule Bonfire.Invite.Links.Test do
   use Bonfire.Invite.Links.ConnCase, async: true
+  @moduletag :backend
 
   test "can create an invite" do
     some_account = fake_account!()
