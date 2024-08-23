@@ -58,7 +58,7 @@
             </Field>
           </div>
           <div class="mt-4">
-            <button class="w-full normal-case btn btn-primary border-primary/30 btn-outline rounded-full btn-wide">
+            <button class="w-full btn btn-neutral">
               {l("Generate a new invite link")}
             </button>
           </div>
