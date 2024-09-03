@@ -44,7 +44,7 @@ defmodule Bonfire.Invite.Links do
   end
 
   def get(id, opts \\ []) do
-    if is_ulid?(id), do: one([id: id], opts)
+    if is_uid?(id), do: one([id: id], opts)
   end
 
   def list_paginated(filters, opts \\ []) do
