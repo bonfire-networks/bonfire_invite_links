@@ -8,12 +8,12 @@ defmodule Bonfire.Invite.Links.LiveHandler do
     with {:ok, invite} <-
            Bonfire.Invite.Links.create(current_user_required!(socket), attrs) do
       socket = assign_flash(socket, :info, "New invite generated!")
-      invites = [invite | socket.assigns.invites]
+      invites = [invite | assigns(socket).invites]
 
       {:noreply,
        assign(
          socket,
-         # ++ e(socket, :assigns, :invites, []),
+         # ++ e(assigns(socket), :invites, []),
          invites: invites,
          feed_update_mode: "prepend"
        )}
@@ -25,7 +25,7 @@ defmodule Bonfire.Invite.Links.LiveHandler do
 
     with %{edges: invites, page_info: page_info} <-
            Bonfire.Invite.Links.list_paginated([],
-             current_user: current_user(socket.assigns),
+             current_user: current_user(assigns(socket)),
              paginate: attrs
            ) do
       # debug(invites)
