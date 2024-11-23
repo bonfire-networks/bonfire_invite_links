@@ -21,6 +21,36 @@ defmodule Bonfire.Invite.Links.Test do
     assert invite.max_days_valid == 2
   end
 
+  test "can delete an invite" do
+    some_account = fake_account!()
+
+    {:ok, someone} =
+      fake_user!(some_account)
+      |> Bonfire.Me.Users.make_admin()
+
+    conn = conn(user: someone, account: some_account)
+
+    {:ok, invite} =
+      Bonfire.Invite.Links.create(someone, %{
+        "max_uses" => 1,
+        "max_days_valid" => 2
+      })
+
+    assert %{edges: [_]} = Bonfire.Invite.Links.list_paginated([], current_user: someone)
+    assert {:ok, _} = Bonfire.Invite.Links.delete(invite)
+    assert %{edges: []} = Bonfire.Invite.Links.list_paginated([], current_user: someone)
+
+    {:ok, invite} =
+      Bonfire.Invite.Links.create(someone, %{
+        "max_uses" => 1,
+        "max_days_valid" => 2
+      })
+
+    # also should work with just an ID
+    assert {:ok, _} = Bonfire.Invite.Links.delete(id(invite), current_user: someone)
+    assert %{edges: []} = Bonfire.Invite.Links.list_paginated([], current_user: someone)
+  end
+
   test "can list invites" do
     some_account = fake_account!()
 
@@ -43,9 +73,6 @@ defmodule Bonfire.Invite.Links.Test do
       })
 
     %{edges: invites} = Bonfire.Invite.Links.list_paginated([], current_user: someone)
-
-    # |> debug()
-
     assert Enum.count(invites) == 2
   end
 

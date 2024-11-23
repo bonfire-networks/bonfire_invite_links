@@ -87,4 +87,20 @@ defmodule Bonfire.Invite.Links do
       false
     end
   end
+
+  def delete(invite, opts \\ [])
+
+  def delete(%InviteLink{} = invite, _opts) do
+    Bonfire.Common.Repo.Delete.hard_delete(invite)
+  end
+
+  def delete(id, opts) when is_binary(id) do
+    get(id, opts)
+    ~> delete(opts)
+  end
+
+  # TODO?
+  # def delete_all_old do
+  #   repo().delete_many(query)
+  # end
 end

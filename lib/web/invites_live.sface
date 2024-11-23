@@ -81,20 +81,20 @@
             </tr>
           </thead>
           <tbody id="invites_list" data-id="invites_list" phx-update={e(@feed_update_mode, "prepend")}>
-            {#for invite <- @invites}
-              <tr id={invite.id}>
+            {#for %{id: id} = invite <- @invites}
+              <tr id={id}>
                 <td class="">
                   <div class="form-control">
                     <div class="flex items-center">
                       <input
-                        id={"invite_#{invite.id}"}
+                        id={"invite_#{id}"}
                         readonly
                         type="text"
-                        value={url_path(:invite, invite.id)}
+                        value={url_path(:invite, id)}
                         class="w-full input text-sm  input-bordered border-base-content/20 rounded-r-none border-r-0 rounded-lg bg-base-content/5"
                       />
                       <div class="h-[48px] px-2 flex items-center place-content-center border border-l-0 border-base-content/30 rounded-l-none">
-                        <div id="copy" data-to={"invite_#{invite.id}"} phx-hook="Copy" class="flex items-center">
+                        <div id="copy" data-to={"invite_#{id}"} phx-hook="Copy" class="flex items-center">
                           <button class="btn-ghost z-30 right-2 top-2 btn btn-sm btn-square">
                             <#Icon iconify="carbon:copy" class="w-5 h-5" />
                             <span class="sr-only">{l("Copy")}</span>
@@ -125,7 +125,12 @@
                   >{l("never")}</span>
                 </td>
                 <th class="flex-1 shrink-0">
-                  <button class="flex items-center btn btn-error btn-square  btn-sm">
+                  <button
+                    class="flex items-center btn btn-error btn-square  btn-sm"
+                    phx-click="Bonfire.Invite.Links:delete"
+                    phx-target="#bonfire_invites"
+                    phx-value-invite={id}
+                  >
                     <#Icon outline="Trash" class="w-4 h-4" />
                   </button>
                 </th>

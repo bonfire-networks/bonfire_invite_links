@@ -6,7 +6,7 @@ defmodule Bonfire.Invite.Links.Web.InvitesLive do
 
   def update(_assigns, socket) do
     %{edges: invites, page_info: page_info} = list_paginated([], socket: socket)
-    debug("mounting #{inspect(invites)}")
+    debug(invites, "mounting")
 
     {:ok,
      assign(
