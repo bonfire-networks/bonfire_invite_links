@@ -126,12 +126,14 @@
                 </td>
                 <th class="flex-1 shrink-0">
                   <button
+                    data-role="delete_invite"
                     class="flex items-center btn btn-error btn-square  btn-sm"
                     phx-click="Bonfire.Invite.Links:delete"
                     phx-target="#bonfire_invites"
                     phx-value-invite={id}
                   >
                     <#Icon outline="Trash" class="w-4 h-4" />
+                    <span class="sr-only">{l("Delete")}</span>
                   </button>
                 </th>
               </tr>

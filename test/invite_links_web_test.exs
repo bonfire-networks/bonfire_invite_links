@@ -58,5 +58,26 @@ defmodule Bonfire.Invite.Links.Web.Test do
       |> visit("/settings/instance/invites")
       |> assert_has("#invites_list tr", count: 2)
     end
+
+    test "delete an invites" do
+      some_account = fake_account!()
+
+      {:ok, someone} =
+        fake_user!(some_account)
+        |> Bonfire.Me.Users.make_admin()
+
+      conn = conn(user: someone, account: some_account)
+
+      Bonfire.Invite.Links.create(someone, %{
+        "max_uses" => 1,
+        "max_days_valid" => 1
+      })
+
+      conn
+      |> visit("/settings/instance/invites")
+      |> click_button("[data-role=delete_invite]", "Delete")
+      |> assert_has("[role=alert]", text: "Deleted")
+      |> refute_has("#invites_list tr")
+    end
   end
 end
