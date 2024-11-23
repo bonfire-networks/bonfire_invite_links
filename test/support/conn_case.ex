@@ -26,8 +26,9 @@ defmodule Bonfire.Invite.Links.ConnCase do
       use Bonfire.UI.Common
       import Bonfire.UI.Common.Testing.Helpers
 
-      import Phoenix.LiveViewTest
+      # import Phoenix.LiveViewTest
       # import Bonfire.Invite.Links.ConnCase, async: true
+      import PhoenixTest
 
       import Bonfire.Invite.Links.Test.ConnHelpers
       import Bonfire.Invite.Links.Test.FakeHelpers
