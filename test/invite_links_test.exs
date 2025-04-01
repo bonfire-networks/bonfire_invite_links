@@ -1,5 +1,5 @@
 defmodule Bonfire.Invite.Links.Test do
-  use Bonfire.Invite.Links.ConnCase, async: true
+  use Bonfire.Invite.Links.DataCase, async: true
   @moduletag :backend
 
   test "can create an invite" do
