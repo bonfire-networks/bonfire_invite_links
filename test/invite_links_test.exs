@@ -9,7 +9,7 @@ defmodule Bonfire.Invite.Links.Test do
       fake_user!(some_account)
       |> Bonfire.Me.Users.make_admin()
 
-    conn = conn(user: someone, account: some_account)
+    # conn = conn(user: someone, account: some_account)
 
     {:ok, invite} =
       Bonfire.Invite.Links.create(someone, %{
@@ -28,7 +28,7 @@ defmodule Bonfire.Invite.Links.Test do
       fake_user!(some_account)
       |> Bonfire.Me.Users.make_admin()
 
-    conn = conn(user: someone, account: some_account)
+    # conn = conn(user: someone, account: some_account)
 
     {:ok, invite} =
       Bonfire.Invite.Links.create(someone, %{
@@ -58,7 +58,7 @@ defmodule Bonfire.Invite.Links.Test do
       fake_user!(some_account)
       |> Bonfire.Me.Users.make_admin()
 
-    conn = conn(user: someone, account: some_account)
+    # conn = conn(user: someone, account: some_account)
 
     {:ok, invite} =
       Bonfire.Invite.Links.create(someone, %{
@@ -83,7 +83,7 @@ defmodule Bonfire.Invite.Links.Test do
       fake_user!(some_account)
       |> Bonfire.Me.Users.make_admin()
 
-    conn = conn(user: someone, account: some_account)
+    # conn = conn(user: someone, account: some_account)
 
     {:ok, invite} =
       Bonfire.Invite.Links.create(someone, %{
@@ -101,7 +101,7 @@ defmodule Bonfire.Invite.Links.Test do
       fake_user!(some_account)
       |> Bonfire.Me.Users.make_admin()
 
-    conn = conn(user: someone, account: some_account)
+    # conn = conn(user: someone, account: some_account)
 
     {:ok, invite} =
       Bonfire.Invite.Links.create(someone, %{
@@ -119,7 +119,7 @@ defmodule Bonfire.Invite.Links.Test do
       fake_user!(some_account)
       |> Bonfire.Me.Users.make_admin()
 
-    conn = conn(user: someone, account: some_account)
+    # conn = conn(user: someone, account: some_account)
 
     {:ok, invite} =
       Bonfire.Invite.Links.create(someone, %{
@@ -137,7 +137,7 @@ defmodule Bonfire.Invite.Links.Test do
       fake_user!(some_account)
       |> Bonfire.Me.Users.make_admin()
 
-    conn = conn(user: someone, account: some_account)
+    # conn = conn(user: someone, account: some_account)
 
     {:ok, invite} =
       Bonfire.Invite.Links.create(someone, %{
@@ -156,7 +156,7 @@ defmodule Bonfire.Invite.Links.Test do
       fake_user!(some_account)
       |> Bonfire.Me.Users.make_admin()
 
-    conn = conn(user: someone, account: some_account)
+    # conn = conn(user: someone, account: some_account)
 
     {:ok, invite} =
       Bonfire.Invite.Links.create(someone, %{
@@ -178,7 +178,7 @@ defmodule Bonfire.Invite.Links.Test do
       fake_user!(some_account)
       |> Bonfire.Me.Users.make_admin()
 
-    conn = conn(user: someone, account: some_account)
+    # conn = conn(user: someone, account: some_account)
 
     {:ok, invite} =
       Bonfire.Invite.Links.create(someone, %{
@@ -202,7 +202,7 @@ defmodule Bonfire.Invite.Links.Test do
       fake_user!(some_account)
       |> Bonfire.Me.Users.make_admin()
 
-    conn = conn(user: someone, account: some_account)
+    # conn = conn(user: someone, account: some_account)
 
     {:ok, invite} =
       Bonfire.Invite.Links.create(someone, %{

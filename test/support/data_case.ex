@@ -23,6 +23,9 @@ defmodule Bonfire.Invite.Links.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       # import Bonfire.Invite.Links.DataCase
+
+      use Bonfire.Common.Utils
+      import Bonfire.Me.Fake
     end
   end
 
