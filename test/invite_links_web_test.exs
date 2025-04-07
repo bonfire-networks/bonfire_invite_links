@@ -13,8 +13,8 @@ defmodule Bonfire.Invite.Links.Web.Test do
       conn =
         conn(user: someone, account: some_account)
         |> visit("/settings/instance/invites")
-        |> select("1", from: "Max number of uses")
-        |> select("1 day", from: "Expire after")
+        |> select("1", option: "Max number of uses")
+        |> select("1 day", option: "Expire after")
         |> click_button("Generate a new invite link")
         |> assert_has("[role=alert]", text: "New invite generated!")
     end
@@ -29,8 +29,8 @@ defmodule Bonfire.Invite.Links.Web.Test do
       conn =
         conn(user: someone, account: some_account)
         |> visit("/settings/instance/invites")
-        |> select("1", from: "Max number of uses")
-        |> select("1 day", from: "Expire after")
+        |> select("1", option: "Max number of uses")
+        |> select("1 day", option: "Expire after")
         |> click_button("Generate a new invite link")
         |> assert_has("span", text: "tomorrow")
     end
