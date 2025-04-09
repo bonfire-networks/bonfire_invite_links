@@ -26,6 +26,8 @@ defmodule Bonfire.Invite.Links.DataCase do
 
       use Bonfire.Common.Utils
       import Bonfire.Me.Fake
+
+      @moduletag :backend
     end
   end
 
