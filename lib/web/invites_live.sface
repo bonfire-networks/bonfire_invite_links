@@ -86,13 +86,7 @@
                 <td class="">
                   <div class="form-control">
                     <div class="flex items-center gap-1">
-                      <input
-                        id={"invite_#{id}"}
-                        readonly
-                        type="text"
-                        value={url_path(:invite, id)}
-                        class="input"
-                      />
+                      <input id={"invite_#{id}"} readonly type="text" value={url_path(:invite, id)} class="input">
 
                       <div id="copy" data-to={"invite_#{id}"} phx-hook="Copy" class="flex items-center">
                         <button class="btn-ghost z-30 btn-soft btn btn-square">
@@ -100,7 +94,6 @@
                           <span class="sr-only">{l("Copy")}</span>
                         </button>
                       </div>
-
                     </div>
                   </div>
                 </td>
