@@ -88,7 +88,13 @@
                     <div class="flex items-center gap-1">
                       <input id={"invite_#{id}"} readonly type="text" value={url_path(:invite, id)} class="input">
 
-                      <div data-id="copy" id={"copy_#{id}"} data-to={"invite_#{id}"} phx-hook="Copy" class="flex items-center">
+                      <div
+                        data-id="copy"
+                        id={"copy_#{id}"}
+                        data-to={"invite_#{id}"}
+                        phx-hook="Copy"
+                        class="flex items-center"
+                      >
                         <button class="btn-ghost z-30 btn-soft btn btn-square">
                           <#Icon iconify="carbon:copy" class="w-4 h-4" />
                           <span class="sr-only">{l("Copy")}</span>
