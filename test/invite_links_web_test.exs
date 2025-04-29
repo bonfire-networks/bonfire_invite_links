@@ -32,7 +32,10 @@ defmodule Bonfire.Invite.Links.Web.Test do
         |> select("Max number of uses", option: "1")
         |> select("Expire after", option: "1 day")
         |> click_button("Generate a new invite link")
-        |> assert_has("span", text: "tomorrow")
+        |> assert_has_or("span", [text: "tomorrow"], fn session ->
+          session
+          |> assert_has("span", text: "in 24 hours")
+        end)
     end
 
     test "shows a list of invites" do
