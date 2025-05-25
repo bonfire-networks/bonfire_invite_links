@@ -43,7 +43,7 @@ defmodule Bonfire.Invite.Links.LiveHandler do
 
     with %{edges: invites, page_info: page_info} <-
            Bonfire.Invite.Links.list_paginated([],
-             current_user: current_user(assigns(socket)),
+             current_user: current_user(socket),
              paginate: attrs
            ) do
       # debug(invites)
