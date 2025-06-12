@@ -101,6 +101,6 @@ defmodule Bonfire.Invite.Links do
 
   # TODO?
   # def delete_all_old do
-  #   repo().delete_many(query)
+  #   repo().delete_all(query)
   # end
 end
