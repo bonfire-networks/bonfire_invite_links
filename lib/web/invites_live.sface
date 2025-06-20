@@ -1,5 +1,5 @@
 <div id="bonfire_invites" class="">
-  {#if !Config.get(:invite_only, nil) or
+  {#if !Config.get(:invite_only, true) or
       can?(@__context__, :invite, :instance)}
     <div class="">
       <Form
