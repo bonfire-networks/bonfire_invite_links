@@ -1,5 +1,5 @@
 defmodule Bonfire.Invite.Links.Web.Test do
-  use Bonfire.Invite.Links.ConnCase, async: true
+  use Bonfire.Invite.Links.ConnCase, async: System.get_env("TEST_UI_ASYNC") != "no"
   @moduletag :ui
 
   describe "generate an invite" do

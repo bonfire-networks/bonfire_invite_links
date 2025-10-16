@@ -11,7 +11,7 @@ defmodule Bonfire.Invite.Links.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use MyApp.Web.ConnCase, async: true`, although
+  by setting `use MyApp.Web.ConnCase, async: System.get_env("TEST_UI_ASYNC") != "no"`, although
   this option is not recommended for other databases.
   """
 
@@ -27,7 +27,7 @@ defmodule Bonfire.Invite.Links.ConnCase do
       import Bonfire.UI.Common.Testing.Helpers
 
       # import Phoenix.LiveViewTest
-      # import Bonfire.Invite.Links.ConnCase, async: true
+      # import Bonfire.Invite.Links.ConnCase, async: System.get_env("TEST_UI_ASYNC") != "no"
       import PhoenixTest
 
       import Bonfire.Invite.Links.Test.ConnHelpers
