@@ -5,11 +5,11 @@
       <Form
         for={%{}}
         as={:invite_link}
-        opts={
+        opts={[
           "data-id": "generate_invite_link",
           "phx-target": "#bonfire_invites",
           "phx-submit": "Bonfire.Invite.Links:generate"
-        }
+        ]}
       >
         <div class="p-4">
           <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -109,10 +109,10 @@
                 <td>
                   <span
                     :if={e(invite, :max_days_valid, 0) > 0}
-                    class={
+                    class={[
                       "flex items-center font-medium gap-2",
                       "text-error": expired?(invite)
-                    }
+                    ]}
                   >
                     <#Icon iconify="basil:clock-outline" class="w-5 h-5 shrink-0 text-base-content/80" />
                     {if expired?(invite), do: l("expired"), else: DatesTimes.date_from_now(date_expires(invite))}
