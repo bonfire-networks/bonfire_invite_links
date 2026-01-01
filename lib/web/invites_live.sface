@@ -86,7 +86,13 @@
                 <td class="">
                   <div class="form-control">
                     <div class="flex items-center gap-1">
-                      <input id={"invite_#{id(invite)}"} readonly type="text" value={url_path(:invite, id(invite))} class="input">
+                      <input
+                        id={"invite_#{id(invite)}"}
+                        readonly
+                        type="text"
+                        value={url_path(:invite, id(invite))}
+                        class="input"
+                      />
 
                       <div
                         data-id="copy"
