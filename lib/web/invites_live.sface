@@ -80,18 +80,18 @@
               <th />
             </tr>
           </thead>
-          <tbody id="invites_list" data-id="invites_list" phx-update={e(@feed_update_mode, "prepend")}>
-            {#for %{id: id} = invite <- @invites}
-              <tr id={id}>
+          <tbody id="invites_list" data-id="invites_list" phx-update="stream">
+            {#for {dom_id, invite} <- @streams.invites}
+              <tr id={dom_id}>
                 <td class="">
                   <div class="form-control">
                     <div class="flex items-center gap-1">
-                      <input id={"invite_#{id}"} readonly type="text" value={url_path(:invite, id)} class="input">
+                      <input id={"invite_#{id(invite)}"} readonly type="text" value={url_path(:invite, id(invite))} class="input">
 
                       <div
                         data-id="copy"
-                        id={"copy_#{id}"}
-                        data-to={"invite_#{id}"}
+                        id={"copy_#{id(invite)}"}
+                        data-to={"invite_#{id(invite)}"}
                         phx-hook="Copy"
                         class="flex items-center"
                       >
@@ -129,7 +129,7 @@
                     class="flex items-center btn btn-error btn-square  btn-sm"
                     phx-click="Bonfire.Invite.Links:delete"
                     phx-target="#bonfire_invites"
-                    phx-value-invite={id}
+                    phx-value-invite={id(invite)}
                   >
                     <#Icon outline="Trash" class="w-4 h-4" />
                     <span class="sr-only">{l("Delete")}</span>

@@ -9,11 +9,8 @@ defmodule Bonfire.Invite.Links.Web.InvitesLive do
     debug(invites, "mounting")
 
     {:ok,
-     assign(
-       socket,
-       invites: invites,
-       page_info: page_info,
-       feed_update_mode: "append"
-     )}
+     socket
+     |> stream(:invites, invites)
+     |> assign(page_info: page_info)}
   end
 end
