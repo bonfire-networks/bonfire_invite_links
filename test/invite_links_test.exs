@@ -130,6 +130,46 @@ defmodule Bonfire.Invite.Links.Test do
     assert Bonfire.Invite.Links.expired?(invite) == false
   end
 
+  test "can check that an invite created within its validity window didn't expire" do
+    invite = backdated_invite!(1, %{"max_uses" => 5, "max_days_valid" => 2})
+
+    assert Bonfire.Invite.Links.expired?(invite) == false
+    assert Bonfire.Invite.Links.redeemable?(invite) == true
+  end
+
+  test "can check that an invite expired, even if it still has uses left" do
+    invite = backdated_invite!(10, %{"max_uses" => 5, "max_days_valid" => 2})
+
+    assert Bonfire.Invite.Links.expired?(invite) == true
+  end
+
+  test "cannot redeem an expired invite that still has uses left" do
+    invite = backdated_invite!(10, %{"max_uses" => 5, "max_days_valid" => 2})
+
+    assert Bonfire.Invite.Links.redeemable?(invite) == false
+
+    assert_raise(RuntimeError, fn ->
+      Bonfire.Invite.Links.redeem(invite)
+    end)
+  end
+
+  test "cannot redeem an expired unlimited-use invite" do
+    invite = backdated_invite!(10, %{"max_uses" => "", "max_days_valid" => 2})
+
+    assert Bonfire.Invite.Links.redeemable?(invite) == false
+
+    assert_raise(RuntimeError, fn ->
+      Bonfire.Invite.Links.redeem(invite)
+    end)
+  end
+
+  test "an invite with no expiry never expires" do
+    invite = backdated_invite!(3650, %{"max_uses" => 1, "max_days_valid" => nil})
+
+    assert Bonfire.Invite.Links.expired?(invite) == false
+    assert Bonfire.Invite.Links.redeemable?(invite) == true
+  end
+
   test "can display an invite's relative expiry date" do
     some_account = fake_account!()
 
@@ -215,5 +255,12 @@ defmodule Bonfire.Invite.Links.Test do
     %{edges: invites} = Bonfire.Invite.Links.list_paginated([], current_user: someone)
 
     assert List.first(invites).max_uses == nil
+  end
+
+  # inserts an invite whose creation date (derived from its ID) is `days_ago` in the past
+  defp backdated_invite!(days_ago, attrs) do
+    %Bonfire.InviteLink{id: DatesTimes.past(days_ago, :day) |> DatesTimes.generate_ulid()}
+    |> Bonfire.InviteLink.changeset(attrs)
+    |> Bonfire.Common.Repo.insert!()
   end
 end

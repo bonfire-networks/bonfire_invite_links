@@ -72,14 +72,12 @@ defmodule Bonfire.Invite.Links do
   end
 
   def expired?(%InviteLink{} = invite) do
-    # |> debug
-    created = DatesTimes.date_from_pointer(invite)
-    # |> debug
     date_expires = date_expires(invite)
-    # no limit
+
+    # no expiry date == no limit
     if date_expires do
-      case DateTime.compare(date_expires, created) do
-        # expiry_date > created == not expired
+      case DateTime.compare(date_expires, DateTime.utc_now()) do
+        # expiry_date still in the future == not expired
         :gt -> false
         _other -> true
       end
