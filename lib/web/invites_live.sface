@@ -120,7 +120,7 @@
                       "text-error": expired?(invite)
                     ]}
                   >
-                    <#Icon iconify="basil:clock-outline" class="w-5 h-5 shrink-0 text-base-content/80" />
+                    <#Icon iconify="basil:clock-outline" class="w-5 h-5 shrink-0 text-muted" />
                     {if expired?(invite), do: l("expired"), else: DatesTimes.date_from_now(date_expires(invite))}
                   </span>
                   <span
