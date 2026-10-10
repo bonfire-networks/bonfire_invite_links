@@ -102,7 +102,7 @@
                         class="flex items-center"
                       >
                         <button class="btn-ghost z-30 btn-soft btn btn-square">
-                          <#Icon iconify="carbon:copy" class="w-4 h-4" />
+                          <#Icon iconify="carbon:copy" class="size-4" />
                           <span class="sr-only">{l("Copy")}</span>
                         </button>
                       </div>
@@ -120,7 +120,7 @@
                       "text-error": expired?(invite)
                     ]}
                   >
-                    <#Icon iconify="basil:clock-outline" class="w-5 h-5 shrink-0 text-muted" />
+                    <#Icon iconify="basil:clock-outline" class="size-5 shrink-0 text-muted" />
                     {if expired?(invite), do: l("expired"), else: DatesTimes.date_from_now(date_expires(invite))}
                   </span>
                   <span
@@ -137,7 +137,7 @@
                     phx-target="#bonfire_invites"
                     phx-value-invite={id(invite)}
                   >
-                    <#Icon outline="Trash" class="w-4 h-4" />
+                    <#Icon outline="Trash" class="size-4" />
                     <span class="sr-only">{l("Delete")}</span>
                   </button>
                 </th>
