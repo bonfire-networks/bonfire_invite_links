@@ -83,4 +83,36 @@ defmodule Bonfire.Invite.Links.Web.Test do
       |> refute_has("#invites_list tr")
     end
   end
+
+  # each choice of the "Expire after" menu must store as many days as its label says
+  describe "the \"Expire after\" choices" do
+    for {label, days} <- [
+          {"Never", nil},
+          {"1 day", 1},
+          {"2 days", 2},
+          {"1 week", 7},
+          {"2 weeks", 14},
+          {"1 month", 28},
+          {"6 months", 182},
+          {"1 year", 365}
+        ] do
+      test "\"#{label}\" makes an invite valid for #{inspect(days)} days" do
+        some_account = fake_account!()
+
+        {:ok, someone} =
+          fake_user!(some_account)
+          |> Bonfire.Me.Users.make_admin()
+
+        conn(user: someone, account: some_account)
+        |> visit("/settings/instance/invites")
+        |> select("Max number of uses", option: "1")
+        |> select("Expire after", option: unquote(label))
+        |> click_button("Generate a new invite link")
+        |> assert_has("[role=alert]", text: "New invite generated!")
+
+        assert {:ok, invite} = Bonfire.Invite.Links.one([])
+        assert invite.max_days_valid == unquote(days)
+      end
+    end
+  end
 end
